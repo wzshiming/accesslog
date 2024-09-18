@@ -1,5 +1,12 @@
 package nginx
 
+import (
+	"fmt"
+
+	"github.com/wzshiming/accesslog"
+	"github.com/wzshiming/accesslog/unsafeutils"
+)
+
 type DefaultAccessLog struct {
 	// Requester's IP address.
 	RemoteAddr string
@@ -21,4 +28,61 @@ type DefaultAccessLog struct {
 	UserAgent string
 	// HTTP x-forwarded-for header.
 	ForwardedFor string
+}
+
+func (a DefaultAccessLog) Formatted() (f AccessLogFormatted, err error) {
+	f.RemoteIP = accesslog.CleanupString(a.RemoteAddr)
+	f.User = accesslog.CleanupString(a.RemoteUser)
+	f.Time = accesslog.CleanupString(a.TimeLocal)
+	req, err := accesslog.ParseRequest(a.Request)
+	if err != nil {
+		return f, fmt.Errorf("failed to formatted request URL: %w", err)
+	}
+	f.RequestMethod = req.Method
+	f.RequestScheme = req.URL.Scheme
+	f.RequestHost = req.URL.Host
+	f.RequestPath = req.URL.Path
+	f.RequestQuery = req.URL.RawQuery
+	f.RequestProto = req.Proto
+
+	f.Status = accesslog.CleanupString(a.Status)
+	f.BodySentBytes = accesslog.CleanupString(a.BodySentBytes)
+	f.Referer = accesslog.CleanupString(a.Referer)
+	f.UserAgent = accesslog.CleanupString(a.UserAgent)
+	f.ForwardedFor = accesslog.CleanupString(a.ForwardedFor)
+	return f, nil
+}
+
+type AccessLogFormatted struct {
+	RemoteIP      string
+	User          string
+	Time          string
+	RequestMethod string
+	RequestScheme string
+	RequestHost   string
+	RequestPath   string
+	RequestQuery  string
+	RequestProto  string
+	Status        string
+	BodySentBytes string
+	Referer       string
+	UserAgent     string
+	ForwardedFor  string
+}
+
+func (AccessLogFormatted) Fields() []string {
+	return unsafeutils.Fields[AccessLogFormatted]()
+}
+
+func (e AccessLogFormatted) Values(fields []string) []string {
+	accessLogEntryFieldsIndexMapping := unsafeutils.FieldsOffset[AccessLogFormatted]()
+	out := make([]string, len(fields))
+	for i, f := range fields {
+		offset, ok := accessLogEntryFieldsIndexMapping[f]
+		if !ok {
+			continue
+		}
+		out[i] = unsafeutils.GetWithOffset[string](&e, offset)
+	}
+	return out
 }
