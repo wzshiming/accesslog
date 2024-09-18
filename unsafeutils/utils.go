@@ -2,7 +2,12 @@ package unsafeutils
 
 import (
 	"reflect"
+	"sync"
 	"unsafe"
+)
+
+var (
+	mut sync.RWMutex
 )
 
 func Get[O any, T any](ptr *T, field string) (o O, ok bool) {
@@ -31,7 +36,17 @@ var cacheFields = map[reflect.Type][]string{}
 
 func Fields[T any]() []string {
 	t := reflect.TypeFor[T]()
+
+	mut.RLock()
 	out, ok := cacheFields[t]
+	mut.RUnlock()
+	if ok {
+		return out
+	}
+
+	mut.Lock()
+	defer mut.Unlock()
+	out, ok = cacheFields[t]
 	if ok {
 		return out
 	}
@@ -52,7 +67,17 @@ var cacheFieldsOffset = map[reflect.Type]map[string]uintptr{}
 
 func FieldsOffset[T any]() map[string]uintptr {
 	t := reflect.TypeFor[T]()
+
+	mut.RLock()
 	out, ok := cacheFieldsOffset[t]
+	mut.RUnlock()
+	if ok {
+		return out
+	}
+
+	mut.Lock()
+	defer mut.Unlock()
+	out, ok = cacheFieldsOffset[t]
 	if ok {
 		return out
 	}
