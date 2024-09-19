@@ -2,6 +2,7 @@ package accesslog
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"sync"
 )
@@ -31,7 +32,7 @@ func ProcessEntries[T any](r io.Reader, callback func(entry Entry[T], err error)
 
 		err = callback(ParseEntry[T](line))
 		if err != nil {
-			return err
+			return fmt.Errorf("process entry: %q: %w", line, err)
 		}
 	}
 	return nil

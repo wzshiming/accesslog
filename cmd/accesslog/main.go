@@ -41,13 +41,14 @@ func run(condition string, fields []string) error {
 			e := entry.Entry()
 			f, err := e.Formatted()
 			if err != nil {
-				return err
+				log.Printf("ignore invalid format access log entry: %#v: %v", e, err)
+				return nil
 			}
 			ch <- f
 			return nil
 		})
 		if err != nil {
-			log.Fatal("Error", err)
+			log.Fatalf("failed to process access log entries: %v", err)
 		}
 	}()
 
