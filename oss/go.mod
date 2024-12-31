@@ -5,7 +5,7 @@ go 1.23.4
 require (
 	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible
 	github.com/spf13/pflag v1.0.5
-	github.com/wzshiming/accesslog v0.0.0-20240919142156-8846d033f7ef
+	github.com/wzshiming/accesslog v0.0.0-20241231092536-6953d5e47a23
 	github.com/wzshiming/httpcache v0.4.2
 )
 

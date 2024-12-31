@@ -17,8 +17,8 @@ github.com/stoewer/go-strcase v1.2.0/go.mod h1:IBiWB2sKIp3wVVQ3Y035++gc+knqhUQag
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.5.1 h1:nOGnQDM7FYENwehXlg/kFVnos3rEvtKTjRvOWSzb6H4=
 github.com/stretchr/testify v1.5.1/go.mod h1:5W2xD1RspED5o8YsWQXVCued0rvSQ+mT+I5cxcmMvtA=
-github.com/wzshiming/accesslog v0.0.0-20240919142156-8846d033f7ef h1:4SFZnMCIxVgxVu2CZFEwRie90j4/i6OOphW2mmJuM+g=
-github.com/wzshiming/accesslog v0.0.0-20240919142156-8846d033f7ef/go.mod h1:Vw8LRkdmjhF7f2RR9ciXB0UVihEaWlYmPbmOrILvgYU=
+github.com/wzshiming/accesslog v0.0.0-20241231092536-6953d5e47a23 h1:MT9zWgGR+nAhS0Tft1rIlElwcVWdTD94DzbYN7dWPLo=
+github.com/wzshiming/accesslog v0.0.0-20241231092536-6953d5e47a23/go.mod h1:iKeNuBgYA//b8g+4efBXIX9q9SeXbIFh8momvqhVPFk=
 github.com/wzshiming/easycel v0.6.0 h1:TwvbeAhi3a1Hf2wjcxlHQvE3W5pQAnhHynekCg5caJY=
 github.com/wzshiming/easycel v0.6.0/go.mod h1:e9t2Fk3f6jxAN4JVwOq8BLPPeOC/4eknIy+QFIYaa2w=
 github.com/wzshiming/httpcache v0.4.2 h1:Wdkd2uj29grsx4XSTkT5oEnFWzEFvYY8KpDv8xyHJ0s=
