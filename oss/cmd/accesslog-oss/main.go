@@ -100,8 +100,9 @@ func run(
 
 	go func() {
 		defer close(ch)
+		zone := time.FixedZone("Beijin", int(8*time.Hour/time.Second))
 		for i := start; i.Before(end); i = i.Add(time.Hour) {
-			date := i.Format(dataFormat) + "-"
+			date := i.In(zone).Format(dataFormat) + "-"
 			err := oss.ProcessAccessLogWithClient(client, bucketName, date, func(entry accesslog.Entry[oss.AccessLog], err error) error {
 				if err != nil {
 					return err
