@@ -23,7 +23,7 @@ func CleanupString(s string) string {
 	case '[':
 		n, err := time.Parse("[02/Jan/2006:15:04:05 -0700]", s)
 		if err == nil {
-			return n.Format(time.RFC3339)
+			return n.UTC().Format(time.RFC3339)
 		}
 		return s
 	}
