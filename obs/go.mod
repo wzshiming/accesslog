@@ -1,6 +1,6 @@
 module github.com/wzshiming/accesslog/obs
 
-go 1.23.4
+go 1.25.0
 
 require (
 	github.com/huaweicloud/huaweicloud-sdk-go-obs v3.24.9+incompatible
@@ -15,8 +15,8 @@ require (
 	github.com/stoewer/go-strcase v1.2.0 // indirect
 	github.com/wzshiming/easycel v0.6.0 // indirect
 	golang.org/x/exp v0.0.0-20230515195305-f3d0a9c9a5cc // indirect
-	golang.org/x/net v0.10.0 // indirect
-	golang.org/x/text v0.9.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20230803162519-f966b187b2e5 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230803162519-f966b187b2e5 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
